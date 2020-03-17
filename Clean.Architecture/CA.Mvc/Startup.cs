@@ -12,11 +12,18 @@ using CA.Mvc.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using CA.Infrastructure.Data.Context;
+using CA.Infrastructure.IoC.DependencyContainer;
 
 namespace CA.Mvc
 {
     public class Startup
     {
+
+        public static void RegisterServices(IServiceCollection services) {
+            DIContainer.RegisterServices(services);
+        }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,8 +39,12 @@ namespace CA.Mvc
                     Configuration.GetConnectionString("CleanArchConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddDbContext<CleanArchDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CleanArchDB")));
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -14,4 +14,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\CA.Infrastructure.Data\CA.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\CA.Infrastructure.IoC\CA.Infrastructure.IoC.csproj" />
+  </ItemGroup>
+
 </Project>
