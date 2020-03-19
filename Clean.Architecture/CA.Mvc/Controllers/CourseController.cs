@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using CA.Application.Interfaces;
 using CA.Application.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CA.Mvc.Controllers
 {
+    [Authorize]
     public class CourseController : Controller
     {
         private readonly ICourseService service;
